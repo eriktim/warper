@@ -6,6 +6,15 @@
     .row > div:first-of-type {
       margin-top: 0.5em;
     }
+
+    wr-thumb {
+      opacity: 0.7;
+    }
+
+    wr-thumb.active-frame,
+    wr-thumb.active-reference {
+      opacity: 1;
+    }
   </style>
 
   <section class="au-animate">
@@ -13,11 +22,11 @@
       <div class="row">
         <div class="col-xs-3">
           <template repeat.for="f of sequence">
-            <wr-thumb frame.bind="f" click.delegate="select(f)"></wr-thumb>
+            <wr-thumb frame.bind="f" click.delegate="select(f)" class.bind="f == frame ? 'active-frame' : (f == frame.reference ? 'active-reference' : '')"></wr-thumb>
           </template>
         </div>
         <div class="col-xs-9">
-          <wr-frame frame.bind="frame" reference.bind="reference"></wr-frame>
+          <wr-frame frame.bind="frame"></wr-frame>
         </div>
       </div>
     </div>

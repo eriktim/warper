@@ -7,10 +7,11 @@ const HOST = 'http://localhost/warper/L';
 export class Editor {
   sequence;
   frame;
-  reference;
 
   constructor() {
     this.sequence = FILES.sort().map(file => new Frame(`${HOST}/${file}`));
+    let reference = this.sequence[0];
+    this.sequence.slice(1).forEach(frame => frame.reference = reference);
     this.select(this.sequence[1]);
   }
 

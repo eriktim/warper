@@ -11,6 +11,10 @@
       cursor: pointer;
     }
 
+    .wr-frame > div {
+      text-align: center;
+    }
+
     .wr-frame img {
       max-height: calc(100vh - 5em);
       margin: 0 auto;
@@ -24,7 +28,7 @@
     </ul>
     <div>
       <img if.bind="source" src.bind="activeFrame.src" class="img-responsive img-rounded">
-      <span if.bind="!source">(no detail)</span>
+      <p class="text-danger" if.bind="!source">(no frame)</p>
     </div>
   </div>
 </template>
