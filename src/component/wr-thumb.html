@@ -1,12 +1,23 @@
 <template>
   <style>
     .wr-thumb {
-      display: inline-block;
+      display: flex;
+      align-items: center;
       cursor: pointer;
+      margin-top: 0.5em;
+    }
+
+    .wr-thumb > div:first-of-type {
+      margin-right: 0.5em;
     }
   </style>
   <div class="wr-thumb">
-    <img if.bind="source" src.bind="frame.src" class="img-responsive img-rounded">
-    <span if.bind="!source">(no image)</span>
+    <div>
+      <span class="badge">${6 - frame.points.size - frame.refPoints.size || ''}</span>
+    </div>
+    <div>
+      <img if.bind="source" src.bind="frame.src" class="img-responsive img-rounded">
+      <span if.bind="!source">(no image)</span>
+    </div>
   </div>
 </template>

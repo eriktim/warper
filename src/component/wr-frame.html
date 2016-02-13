@@ -29,22 +29,35 @@
       content: "\00b7";
       font-size: 2em;
       color: #0f0;
-      filter: invert(100%);
       line-height: 100px;
       text-align: center;
+    }
+
+    .wr-frame .point {
+      z-index: 100;
+      position: absolute;
+      color: #0f0;
+      font-size: 2em;
+      text-align: center;
+      line-height: 2em;
     }
   </style>
 
   <div class="wr-frame">
     <ul class="nav nav-pills nav-justified">
       <li role="presentation" class.bind="activeFrame == frame ? 'active' : ''">
-        <a click.delegate="toggle()">Frame <span class="badge">${3 - frame.points.size}</span></a>
+        <a click.delegate="toggle()">Frame <span class="badge">${3 - frame.points.size || ''}</span></a>
       </li>
       <li role="presentation" class.bind="activeFrame == reference ? 'active' : ''">
-        <a click.delegate="toggle()">Reference <span class="badge">${3 - frame.refPoints.size}</span></a></li>
+        <a click.delegate="toggle()">Reference <span class="badge">${3 - frame.refPoints.size || ''}</span></a></li>
     </ul>
     <div>
-      <img if.bind="source" src.bind="activeFrame.src" class="img-responsive img-rounded">
+      <template if.bind="source">
+        <img src.bind="activeFrame.src" class="img-responsive img-rounded">
+        <template repeat.for="point of activePoints">
+          <span class="point" style="left: ${left(point)}px; top: ${top(point)}px">&#x274c;</span>
+        </template>
+      </template>
       <p class="text-danger" if.bind="!source">(no frame)</p>
     </div>
   </div>
