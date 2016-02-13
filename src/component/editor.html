@@ -1,0 +1,25 @@
+<template>
+  <require from="./wr-frame"></require>
+  <require from="./wr-thumb"></require>
+
+  <style>
+    .row > div:first-of-type {
+      margin-top: 0.5em;
+    }
+  </style>
+
+  <section class="au-animate">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <template repeat.for="f of sequence">
+            <wr-thumb frame.bind="f" click.delegate="select(f)"></wr-thumb>
+          </template>
+        </div>
+        <div class="col-xs-9">
+          <wr-frame frame.bind="frame" reference.bind="reference"></wr-frame>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

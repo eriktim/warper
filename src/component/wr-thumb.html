@@ -1,0 +1,12 @@
+<template>
+  <style>
+    .wr-thumb {
+      display: inline-block;
+      cursor: pointer;
+    }
+  </style>
+  <div class="wr-thumb">
+    <img if.bind="source" src.bind="frame.src" class="img-responsive img-rounded">
+    <span if.bind="!source">(no image)</span>
+  </div>
+</template>

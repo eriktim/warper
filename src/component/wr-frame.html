@@ -1,0 +1,30 @@
+<template>
+  <style>
+    .wr-frame {
+      position:fixed;
+      top:0;
+      max-height: 100%;
+    }
+
+    .wr-frame .nav {
+      margin: 0.5em 0;
+      cursor: pointer;
+    }
+
+    .wr-frame img {
+      max-height: calc(100vh - 5em);
+      margin: 0 auto;
+    }
+  </style>
+
+  <div class="wr-frame">
+    <ul class="nav nav-pills nav-justified">
+      <li role="presentation" class.bind="activeFrame == frame ? 'active' : ''"><a click.delegate="toggle()">Frame</a></li>
+      <li role="presentation" class.bind="activeFrame == reference ? 'active' : ''"><a click.delegate="toggle()">Reference</a></li>
+    </ul>
+    <div>
+      <img if.bind="source" src.bind="activeFrame.src" class="img-responsive img-rounded">
+      <span if.bind="!source">(no detail)</span>
+    </div>
+  </div>
+</template>
