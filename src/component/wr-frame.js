@@ -1,5 +1,5 @@
 import 'jquery';
-import 'jquery-zoom';
+import 'okfocus/okzoom/src/okzoom.min';
 import {bindable, computedFrom} from 'aurelia-framework';
 
 export class WrFrame {
@@ -13,19 +13,12 @@ export class WrFrame {
   }
 
   attached() {
-    this.enableZoom();
+    $('.wr-frame img').okzoom({
+      width: 100,
+      height: 100,
+      scaleWidth: 2 * this.frame.width
+    });
   }
-
-  enableZoom() {
-    $('.wr-frame img')
-      .wrap('<span style="display:inline-block"></span>')
-      .css('display', 'block')
-      .parent()
-      .zoom({
-        magnify: 2,
-        on: 'click'
-      });
-    }
 
   toggle() {
     if (!this.activeFrame || this.activeFrame != this.frame) {
@@ -33,7 +26,6 @@ export class WrFrame {
     } else {
       this.activeFrame = this.reference;
     }
-    this.enableZoom();
   }
 
   frameChanged() {

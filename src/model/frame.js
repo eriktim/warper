@@ -6,8 +6,8 @@ export const State = {
 
 export class Frame {
   src;
-  width;
-  height;
+  width = 2592;
+  height = 1944;
   reference;
   points;
   refPoints;
