@@ -15,31 +15,17 @@
       text-align: center;
     }
 
-    .wr-frame img {
+    .wr-frame svg {
+      width: 100%;
+      height: 100%;
       max-height: calc(100vh - 5em);
       margin: 0 auto;
     }
 
-    #ok-loupe:after {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      content: "\00b7";
-      font-size: 2em;
-      color: #0f0;
-      line-height: 100px;
-      text-align: center;
-    }
-
     .wr-frame .point {
-      z-index: 100;
-      position: absolute;
-      color: #0f0;
-      font-size: 2em;
-      text-align: center;
-      line-height: 2em;
+      stroke: #0f0;
+      stroke-width: 1em;
+      fill: transparent;
     }
   </style>
 
@@ -53,10 +39,14 @@
     </ul>
     <div>
       <template if.bind="source">
-        <img src.bind="activeFrame.src" class="img-responsive img-rounded">
-        <template repeat.for="point of activePoints">
-          <span class="point" style="left: ${left(point)}px; top: ${top(point)}px">&#x274c;</span>
-        </template>
+        <?xml version="1.0" encoding="utf-8" ?>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="${viewBox}" class="img-rounded" ref="svg">
+          <image width="${activeFrame.width}" height="${activeFrame.height}" xlink:href="${activeFrame.src}" click.delegate="click($event)"/>
+          <g repeat.for="point of activePoints">
+            <circle class="point" cx="${point.x}" cy="${point.y}" r="48" click.delegate="remove(point)"/>
+          </g>
+        </svg>
       </template>
       <p class="text-danger" if.bind="!source">(no frame)</p>
     </div>
