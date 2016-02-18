@@ -3,6 +3,7 @@ import {Point} from '../model/point';
 import math from 'mathjs';
 
 const ZOOM_FACTOR = 2;
+const THREE = 3;
 
 function clamp(x, a, b) {
   return x < a ? a : x > b ? b : x
@@ -60,6 +61,7 @@ export class WrFrame {
       let sx = this.focus.x + (offsetX - rect.width / 2) / ZOOM_FACTOR;
       let sy = this.focus.y + (offsetY - rect.height / 2) / ZOOM_FACTOR;
       this.activePoints.add(new Point(sx, sy));
+      this.updatePointsOrder();
       this.focus = null;
     }
   }
@@ -97,7 +99,8 @@ export class WrFrame {
   }
 
   updatePreview() {
-    let noPreview = !this.preview || this.frame.points.size < 3 || this.frame.refPoints.size < 3;
+    let noPreview = !this.preview ||
+        this.frame.points.size < THREE || this.frame.refPoints.size < THREE;
     if (noPreview) {
       this.transform = '';
       return;
@@ -121,18 +124,30 @@ export class WrFrame {
     this.transform = `matrix(${M.reduce((arr, row) => arr.concat(row), []).join(' ')})`;
   }
 
-      /* TODO
-    for (let p of u) {
-      let m = Infinity;
-      let mq;
-      refPoints.forEach(q => {
-        let d = math.distance([p.x, p.y], [q.x, q.y]);
-        if (d < min) {
-          m = d;
-          mq = q;
-        }
-      });
-      v.push(mq);
+  updatePointsOrder() {
+    if (this.frame.points.size < THREE || this.frame.refPoints.size < THREE) {
+      return;
     }
-      */
+    let u = Array.from(this.frame.points);
+    let v = Array.from(this.frame.refPoints);
+    let w;
+    let min = Infinity;
+    let indices = [];
+    for (let a of v) {
+      for (let b of v.filter(e => e !== a)) {
+        let c = v.find(e => e !== a && e !== b);
+        let vc = [a, b, c];
+        let d = this.distance(u, vc)
+        if (d < min) {
+          min = d;
+          w = vc;
+        }
+      }
+    }
+    this.frame.refPoints = new Set(w);
+  }
+
+  distance(u, v) {
+    return u.reduce((d, ui, i) => d + math.distance([ui.x, ui.y], [v[i].x, v[i].y]), 0);
+  }
 }
