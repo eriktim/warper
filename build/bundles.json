@@ -27,7 +27,8 @@
         "aurelia-history-browser",
         "aurelia-logging-console",
         "bootstrap",
-        "bootstrap/css/bootstrap.css!text"
+        "bootstrap/css/bootstrap.css!text",
+        "awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css!text"
       ],
       "options": {
         "inject": true,

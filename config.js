@@ -25,6 +25,7 @@ System.config({
     "aurelia-templating-binding": "npm:aurelia-templating-binding@1.0.0-beta.1.1.0",
     "aurelia-templating-resources": "npm:aurelia-templating-resources@1.0.0-beta.1.1.0",
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.0-beta.1.1.0",
+    "awesome-bootstrap-checkbox": "npm:awesome-bootstrap-checkbox@0.3.7",
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "bootstrap": "github:twbs/bootstrap@3.3.6",

@@ -1,9 +1,3 @@
-export const State = {
-  UNDECIDED: 'undecided',
-  REJECTED: 'rejected',
-  ADDED: 'added'
-};
-
 export class Frame {
   src;
   width = 2592;
@@ -11,7 +5,7 @@ export class Frame {
   reference;
   points;
   refPoints;
-  state = State.UNDECIDED;
+  enabled = true;
 
   constructor(src, ref) {
     this.src = src;

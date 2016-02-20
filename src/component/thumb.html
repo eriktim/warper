@@ -13,9 +13,15 @@
   </style>
   <div class="wr-thumb">
     <div>
-      <span class="badge">${6 - frame.points.size - frame.refPoints.size || ''}</span>
+      <div class="checkbox checkbox-primary">
+        <input type="checkbox" class="styled styled-primary" checked.bind="frame.enabled">
+        <label></label>
+      </div>
+      <template if.bind="frame.enabled">
+        <span class="badge">${6 - frame.points.size - frame.refPoints.size || ''}</span>
+      </template>
     </div>
-    <div>
+    <div click.delegate="select(frame)" >
       <img if.bind="source" src.bind="frame.src" class="img-responsive img-rounded">
       <span if.bind="!source">(no image)</span>
     </div>

@@ -18,7 +18,7 @@
       <div class="row">
         <div class="col-xs-3">
           <template repeat.for="f of sequence">
-            <wr-thumb frame.bind="f" click.delegate="select(f)" class.bind="f == frame ? 'active-frame' : (f == frame.reference ? 'active-reference' : '')"></wr-thumb>
+            <wr-thumb select.bind="selectInternal" frame.bind="f" class.bind="f == frame ? 'active-frame' : (f == frame.reference ? 'active-reference' : '')"></wr-thumb>
           </template>
         </div>
         <div class="col-xs-9">
