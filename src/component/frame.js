@@ -11,6 +11,7 @@ function clamp(x, a, b) {
 
 export class WrFrame {
   @bindable frame;
+  @bindable dirty;
   reference;
   preview = false;
   activeFrame;
@@ -63,6 +64,7 @@ export class WrFrame {
       this.activePoints.add(new Point(sx, sy));
       this.updatePointsOrder();
       this.focus = null;
+      this.dirty();
     }
   }
 
@@ -149,5 +151,9 @@ export class WrFrame {
 
   distance(u, v) {
     return u.reduce((d, ui, i) => d + math.distance([ui.x, ui.y], [v[i].x, v[i].y]), 0);
+  }
+
+  dirty() {
+    this.dirty();
   }
 }
