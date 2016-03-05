@@ -2,23 +2,12 @@
   <require from="./frame"></require>
   <require from="./thumb"></require>
 
-  <style>
-    wr-thumb {
-      opacity: 0.7;
-    }
-
-    wr-thumb.active-frame,
-    wr-thumb.active-reference {
-      opacity: 1;
-    }
-  </style>
-
   <section class="au-animate">
     <div class="container">
       <div class="row">
         <div class="col-xs-3">
           <template repeat.for="f of sequence">
-            <wr-thumb select.bind="selectInternal" frame.bind="f" class.bind="f == frame ? 'active-frame' : (f == frame.reference ? 'active-reference' : '')"></wr-thumb>
+            <wr-thumb select.bind="selectInternal" set-reference.bind="setReferenceInternal" frame.bind="f" index="${$index}" index-current="${indexCurrent}" index-reference="${indexReference}"></wr-thumb>
           </template>
         </div>
         <div class="col-xs-9">

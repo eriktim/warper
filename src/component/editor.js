@@ -1,4 +1,4 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, computedFrom} from 'aurelia-framework';
 import {Frame} from '../model/frame';
 import {Point} from '../model/point';
 
@@ -8,19 +8,30 @@ const HOST = 'http://localhost/warper/L';
 export class Editor {
   sequence = [];
   frame;
+  reference;
   @bindable dirty;
   selectInternal;
+  setReferenceInternal;
 
   constructor() {
+    this.dirtyInternal = this.dirty.bind(this);
+    this.selectInternal = this.select.bind(this);
+    this.setReferenceInternal = this.setReference.bind(this);
+
     let persistentData = localStorage.getItem('sequence');
     if (persistentData) {
       let sequenceObjects = JSON.parse(persistentData);
       for (let sequenceObject of sequenceObjects) {
         let frame = new Frame();
         for (let propertyName in sequenceObject) {
-          if (!['points', 'refPoints'].includes(propertyName)) {
+          if (!['reference', 'points', 'refPoints'].includes(propertyName)) {
             frame[propertyName] = sequenceObject[propertyName];
           }
+        }
+        let refSrc = sequenceObject.reference ? sequenceObject.reference.src : undefined; // TODO id after run
+        if (refSrc) {
+          let ref = this.sequence.find(f => f.src === refSrc);
+          if (ref) frame.reference = ref;
         }
         frame.points = new Set();
         frame.refPoints = new Set();
@@ -38,9 +49,16 @@ export class Editor {
       this.sequence.slice(1).forEach(frame => frame.reference = reference);
     }
     this.select(this.sequence[1]);
+  }
 
-    this.dirtyInternal = this.dirty.bind(this);
-    this.selectInternal = this.select.bind(this);
+  @computedFrom('frame')
+  get indexCurrent() {
+    return this.sequence.indexOf(this.frame);
+  }
+
+  @computedFrom('reference')
+  get indexReference() {
+    return this.sequence.indexOf(this.reference);
   }
 
   dirty() {
@@ -51,6 +69,14 @@ export class Editor {
 
   select(frame) {
     this.frame = frame;
-    this.reference = this.sequence[this.sequence.indexOf(frame) - 1];
+    this.reference = frame.reference;
+  }
+
+  setReference(reference) {
+    if (this.frame) {
+      this.frame.reference = reference;
+      this.reference = reference;
+      this.dirty();
+    }
   }
 }

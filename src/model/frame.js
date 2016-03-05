@@ -1,4 +1,5 @@
 export class Frame {
+  id;
   src;
   width = 2592;
   height = 1944;
@@ -8,6 +9,7 @@ export class Frame {
   enabled = true;
 
   constructor(src, ref) {
+    this.id = src ? src.split('/').pop().split('.').shift() : undefined;
     this.src = src;
     this.reference = ref;
     this.points = new Set();

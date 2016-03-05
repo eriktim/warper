@@ -7,21 +7,39 @@
       margin-top: 0.5em;
     }
 
+    .wr-thumb img {
+      opacity: 0.7;
+    }
+
+    .wr-thumb.is-current img {
+      opacity: 1;
+      box-shadow: 0px 0px 17px rgb(51, 122, 183);
+    }
+
+    .wr-thumb.is-reference img {
+      opacity: 1;
+      box-shadow: 0px 0px 17px rgb(127, 127, 127);
+    }
+
     .wr-thumb > div:first-of-type {
       margin-right: 0.5em;
     }
   </style>
-  <div class="wr-thumb">
+  <div class="wr-thumb ${stateClass}">
     <div>
       <div class="checkbox checkbox-primary">
-        <input type="checkbox" class="styled styled-primary" checked.bind="frame.enabled">
+        <input type="checkbox" checked.bind="frame.enabled">
         <label></label>
       </div>
       <template if.bind="frame.enabled">
-        <span class="badge">${6 - frame.points.size - frame.refPoints.size || ''}</span>
+        <div class="radio radio-primary" if.bind="isReferenceCandidate">
+          <input click.delegate="setReferenceInternal(frame)" type="radio" name="radio-reference" model.bind="true" checked.bind="isReference">
+          <label></label>
+        </div>
+        <span class="badge">${index > 0 ? 6 - frame.points.size - frame.refPoints.size || '' : ''}</span>
       </template>
     </div>
-    <div click.delegate="select(frame)" >
+    <div click.delegate="selectInternal(frame)" >
       <img if.bind="source" src.bind="frame.src" class="img-responsive img-rounded">
       <span if.bind="!source">(no image)</span>
     </div>
