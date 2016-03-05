@@ -13,6 +13,7 @@ export class WrFrame {
   @bindable frame;
   @bindable dirty;
   reference;
+  fixedReference = false;
   preview = false;
   activeFrame;
   activePoints;
@@ -39,6 +40,14 @@ export class WrFrame {
       viewBox = '0 0 0 0';
     }
     return viewBox;
+  }
+
+  bind(bindingContext) {
+    this.bindingContext = bindingContext;
+  }
+
+  attached() {
+    this.frameChanged();
   }
 
   click(event) {
@@ -97,6 +106,7 @@ export class WrFrame {
     this.reference = this.frame.reference;
     this.activeFrame = null;
     this.zoomed = false;
+    this.fixedReference = this.bindingContext.sequence.indexOf(this.frame) <= 1;
     this.showTab('frame');
   }
 
@@ -155,5 +165,14 @@ export class WrFrame {
 
   dirty() {
     this.dirty();
+  }
+
+  copyReference() {
+    let index = this.bindingContext.sequence.indexOf(this.frame);
+    if (index > 1) {
+      let ref = sequence[index - 1];
+      this.frame.refPoints = new Set(ref.refPoints);
+      this.frame.reference = ref;
+    }
   }
 }

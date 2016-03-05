@@ -1,9 +1,12 @@
 <template>
   <style>
     .wr-frame {
-      position:fixed;
-      top:0;
-      max-height: 100%;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
       -moz-user-select: none;
       -webkit-user-select: none;
       -ms-user-select: none;
@@ -32,32 +35,41 @@
       stroke-width: 1em;
       fill: transparent;
     }
+
+    .wr-frame button {
+    margin-bottom: 0.5em;
+    }
   </style>
 
   <div class="wr-frame">
-    <ul class="nav nav-pills nav-justified">
-      <li role="presentation" class.bind="activeFrame == frame && !preview ? 'active' : ''">
-        <a click.delegate="showTab('frame')">Frame <span class="badge">${3 - frame.points.size || ''}</span></a>
-      </li>
-      <li role="presentation" class.bind="activeFrame == reference ? 'active' : ''">
-        <a click.delegate="showTab('reference')">Reference <span class="badge">${3 - frame.refPoints.size || ''}</span></a>
-      </li>
-      <li role="presentation" class.bind="preview ? 'active' : ''">
-        <a click.delegate="showTab('preview')">Preview</a>
-      </li>
-    </ul>
     <div>
-      <template if.bind="source">
-        <?xml version="1.0" encoding="utf-8" ?>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="${viewBox}" class="img-rounded" ref="svg">
-          <image width="${activeFrame.width}" height="${activeFrame.height}" xlink:href="${activeFrame.src}" click.delegate="click($event)" transform.bind="transform"/>
-          <g repeat.for="point of activePoints">
-            <circle class="point" cx="${point.x}" cy="${point.y}" r="48" click.delegate="remove(point)"/>
-          </g>
-        </svg>
-      </template>
-      <p class="text-danger" if.bind="!source">(no image)</p>
+      <ul class="nav nav-pills nav-justified">
+        <li role="presentation" class.bind="activeFrame == frame && !preview ? 'active' : ''">
+          <a click.delegate="showTab('frame')">Frame <span class="badge">${3 - frame.points.size || ''}</span></a>
+        </li>
+        <li role="presentation" class.bind="activeFrame == reference ? 'active' : ''">
+          <a click.delegate="showTab('reference')">Reference <span class="badge">${frame.reference ? 3 - frame.refPoints.size || '' : ''}</span></a>
+        </li>
+        <li role="presentation" class.bind="preview ? 'active' : ''">
+          <a click.delegate="showTab('preview')">Preview</a>
+        </li>
+      </ul>
+      <div>
+        <template if.bind="source">
+          <?xml version="1.0" encoding="utf-8" ?>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="${viewBox}" class="img-rounded" ref="svg">
+            <image width="${activeFrame.width}" height="${activeFrame.height}" xlink:href="${activeFrame.src}" click.delegate="click($event)" transform.bind="transform"/>
+            <g repeat.for="point of activePoints">
+              <circle class="point" cx="${point.x}" cy="${point.y}" r="48" click.delegate="remove(point)"/>
+            </g>
+          </svg>
+        </template>
+        <p class="text-danger" if.bind="!source">(no image)</p>
+      </div>
+    </div>
+    <div>
+      <button type="button" class="btn btn-warning" click.delegate="copyReference()" if.bind="!fixedReference">Copy reference from last frame</button>
     </div>
   </div>
 </template>
