@@ -1,4 +1,15 @@
+import {inject} from 'aurelia-framework';
+import {AuthenticationService} from './firebase/authentication';
+
+@inject(AuthenticationService)
 export class App {
+  constructor(authenticationService) {
+    if (!authenticationService.isLoggedIn()) {
+      authenticationService.login('e.timmers@gmail.com', 'test')
+        .then(() => authenticationService.logout());
+    }
+  }
+
   configureRouter(config, router) {
     config.title = 'Warper';
     config.map([
