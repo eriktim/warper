@@ -6,7 +6,7 @@ const ZOOM_FACTOR = 2;
 const THREE = 3;
 
 function clamp(x, a, b) {
-  return x < a ? a : x > b ? b : x
+  return x < a ? a : x > b ? b : x;
 }
 
 export class WrFrame {
@@ -83,27 +83,27 @@ export class WrFrame {
 
   showTab(type) {
     switch (type) {
-      case 'frame':
-        this.activeFrame = this.frame;
-        this.activePoints = this.frame.points;
-        this.preview = false;
-        break;
-      case 'reference':
-        this.activeFrame = this.reference;
-        this.activePoints = this.frame.refPoints;
-        this.preview = false;
-        break;
-      case 'preview':
-        this.activeFrame = this.frame;
-        this.activePoints = null;
-        this.preview = true;
-        break;
+    case 'frame':
+      this.activeFrame = this.frame;
+      this.activePoints = this.frame ? this.frame.points : new Set();
+      this.preview = false;
+      break;
+    case 'reference':
+      this.activeFrame = this.reference;
+      this.activePoints = this.frame ? this.frame.refPoints : new Set();
+      this.preview = false;
+      break;
+    case 'preview':
+      this.activeFrame = this.frame;
+      this.activePoints = null;
+      this.preview = true;
+      break;
     }
     this.updatePreview();
   }
 
   frameChanged() {
-    this.reference = this.frame.reference;
+    this.reference = this.frame ? this.frame.reference : undefined;
     this.activeFrame = null;
     this.zoomed = false;
     this.fixedReference = this.bindingContext.sequence.indexOf(this.frame) <= 1;

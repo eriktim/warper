@@ -4,10 +4,13 @@ import {AuthenticationService} from './firebase/authentication';
 @inject(AuthenticationService)
 export class App {
   constructor(authenticationService) {
-    if (!authenticationService.isLoggedIn()) {
-      authenticationService.login('e.timmers@gmail.com', 'test')
-        .then(() => authenticationService.logout());
-    }
+window.authenticationService = authenticationService;
+    Promise.resolve()
+      .then(() => {
+        if (!authenticationService.isLoggedIn()) {
+          return authenticationService.login('e.timmers@gmail.com', 'test');
+        }
+      });
   }
 
   configureRouter(config, router) {

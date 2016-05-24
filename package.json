@@ -1,22 +1,20 @@
 {
-  "name": "aurelia-skeleton-navigation",
-  "version": "1.0.0-beta.1.1.3",
-  "description": "A starter kit for building a standard navigation-style app with Aurelia.",
+  "name": "warper",
+  "version": "0.1.0",
+  "description": "Warper.",
   "keywords": [
-    "aurelia",
-    "navigation",
-    "skeleton"
+    "warper"
   ],
-  "homepage": "http://aurelia.io",
+  "homepage": "https://github.com/gingerik/warper",
   "bugs": {
-    "url": "https://github.com/aurelia/skeleton-navigation/issues"
+    "url": "https://github.com/gingerik/warper/issues"
   },
   "license": "CC0-1.0",
-  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "author": "Erik Timmers <e.timmers@gmail.com>",
   "main": "dist/main.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/aurelia/skeleton-navigation"
+    "url": "http://github.com/gingerik/warper"
   },
   "scripts": {
     "test": "gulp test",
@@ -25,13 +23,21 @@
   "devDependencies": {
     "aurelia-bundler": "^0.3.0",
     "aurelia-tools": "^0.1.18",
-    "babel": "^5.8.23",
     "babel-eslint": "^4.1.3",
+    "babel-plugin-syntax-flow": "^6.8.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-es2015-modules-amd": "^6.8.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-plugin-transform-es2015-modules-systemjs": "^6.8.0",
+    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-es2015-loose": "^7.0.0",
+    "babel-preset-stage-1": "^6.5.0",
     "browser-sync": "^2.10.0",
     "conventional-changelog": "0.0.11",
     "del": "^1.1.0",
     "gulp": "^3.8.10",
-    "gulp-babel": "^5.1.0",
+    "gulp-babel": "^6.1.2",
     "gulp-bump": "^0.3.1",
     "gulp-changed": "^1.1.0",
     "gulp-eslint": "^1.0.0",
@@ -44,7 +50,7 @@
     "jasmine-core": "^2.1.3",
     "jspm": "0.16.15",
     "karma": "^0.13.15",
-    "karma-babel-preprocessor": "^5.2.1",
+    "karma-babel-preprocessor": "^6.0.1",
     "karma-chrome-launcher": "^0.2.1",
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.5",
@@ -71,20 +77,22 @@
       "aurelia-templating-router": "npm:aurelia-templating-router@^1.0.0-beta.1.1.0",
       "awesome-bootstrap-checkbox": "npm:awesome-bootstrap-checkbox@^0.3.7",
       "bootstrap": "github:twbs/bootstrap@^3.3.5",
+      "exif-js": "npm:exif-js@^2.1.1",
       "fetch": "github:github/fetch@^0.10.1",
-      "firebase": "npm:firebase@^2.4.2",
+      "firebase": "npm:firebase@3.0.2",
       "font-awesome": "npm:font-awesome@^4.5.0",
       "mathjs": "npm:mathjs@^2.7.0",
+      "persistence-js": "github:gingerik/persistence-js@master",
       "text": "github:systemjs/plugin-text@^0.0.3"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^2.0.3"
+      "core-js": "npm:core-js@^1.1.4"
     },
     "overrides": {
-      "npm:core-js@2.0.3": {
-        "main": "client/shim.min"
+      "github:gingerik/persistence-js@master": {
+        "main": "aurelia"
       }
     }
   }

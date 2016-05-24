@@ -1,18 +1,46 @@
-export class Frame {
-  id;
-  src;
-  width = 2592;
-  height = 1944;
-  reference;
-  points;
-  refPoints;
-  enabled = true;
+import {LogManager} from 'aurelia-framework';
+import {EXIF} from 'exif-js';
+import {ElementCollection, Entity, Id, OneToOne, PostLoad} from 'persistence-js';
+import {Point} from './point';
 
-  constructor(src, ref) {
-    this.id = src ? src.split('/').pop().split('.').shift() : undefined;
-    this.src = src;
-    this.reference = ref;
-    this.points = new Set();
-    this.refPoints = new Set();
+const logger = LogManager.getLogger('Frame');
+
+function storeExifData(frame, data) {
+  frame.width = EXIF.getTag(data, 'PixelXDimension');
+  frame.height = EXIF.getTag(data, 'PixelYDimension');
+  frame.created = EXIF.getTag(data, 'DateTime')
+      .replace(/([0-9]{4}):([0-9]{2}):([0-9]{2})/, '$1-$2-$3');
+}
+
+@Entity
+export class Frame {
+  @Id id;
+  src = undefined;
+  created = undefined;
+  width = undefined;
+  height = undefined;
+  @OneToOne() reference;
+  @ElementCollection(Point) points;
+  @ElementCollection(Point) refPoints;
+  enabled = undefined;
+
+  @PostLoad
+  extractExifData() {
+    if (!this.src) {
+      return;
+    }
+    if (!this.width || !this.height || !this.created) {
+      logger.info('extracting exif data');
+      let frame = this;
+      let image = new Image();
+      image.onload = function() {
+        EXIF.getData(image, function() {
+          storeExifData(frame, this);
+          logger.info(`found exif data: ${frame.width}x${frame.height}, ${frame.created}`);
+          image = null;
+        });
+      };
+      image.src = this.src;
+    }
   }
 }
