@@ -1,5 +1,5 @@
 import {computedFrom, inject, LogManager} from 'aurelia-framework';
-import {EntityManager} from 'persistence-js';
+import {EntityManager} from 'persistence';
 import {Frame} from '../model/frame';
 
 @inject(EntityManager)

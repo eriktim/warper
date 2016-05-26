@@ -37,9 +37,9 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.1",
     "mathjs": "npm:mathjs@2.7.0",
     "okfocus/okzoom": "github:okfocus/okzoom@master",
-    "persistence-js": "github:gingerik/persistence-js@master",
+    "persistence": "github:gingerik/persistence@master",
     "text": "github:systemjs/plugin-text@0.0.3",
-    "github:gingerik/persistence-js@master": {
+    "github:gingerik/persistence@master": {
       "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6"
     },
     "github:jspm/nodelibs-assert@0.1.0": {

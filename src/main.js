@@ -1,17 +1,19 @@
 import 'bootstrap';
-import {EntityManager} from 'persistence-js';
 
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('persistence-js', baseConfig => {
+    .plugin('persistence', baseConfig => {
       baseConfig.configure({
         baseUrl: 'https://warper.firebaseio.com',
-        fetchInterceptor: (url, init, params) => {
+        requestInterceptor: request => {
           return window.authenticationService.getToken().then(token => {
-            params.auth = token;
-            return `${url}.json`;
+            //params.auth = token;
+            console.log(request.url);
+            let parts = request.url.split('?');
+            let url = parts[0] + '.json?' + parts.slice(1);
+            console.log(url);
           });
         }
       });

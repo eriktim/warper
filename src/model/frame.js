@@ -1,6 +1,6 @@
 import {LogManager} from 'aurelia-framework';
 import {EXIF} from 'exif-js';
-import {ElementCollection, Entity, Id, OneToOne, PostLoad} from 'persistence-js';
+import {ElementCollection, Entity, Id, OneToOne, PostLoad} from 'persistence';
 import {Point} from './point';
 
 const logger = LogManager.getLogger('Frame');
