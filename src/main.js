@@ -9,11 +9,14 @@ export function configure(aurelia) {
         baseUrl: 'https://warper.firebaseio.com',
         requestInterceptor: request => {
           return window.authenticationService.getToken().then(token => {
-            //params.auth = token;
-            console.log(request.url);
-            let parts = request.url.split('?');
-            let url = parts[0] + '.json?' + parts.slice(1);
-            console.log(url);
+            // TODO auth function
+            let [path, ...params] = request.url.split('?');
+            let url = `${path}.json?auth=${[token, params.join('?')].join('&')}`;
+            let init = {};
+            ['method', 'headers', 'body', 'mode', 'credentials',
+              'cache', 'redirect', 'referrer', 'integrity']
+                .forEach(prop => init[prop] = request[prop]);
+            return new Request(url, init);
           });
         }
       });
