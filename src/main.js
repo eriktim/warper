@@ -4,21 +4,17 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
+    .plugin('aurelia-firebase', baseConfig => {
+      baseConfig.configure({
+        apiKey: 'AIzaSyC373ylG9TII68H3Xua_nS2dVI0ihaCgZs',
+        authDomain: 'warper.firebaseapp.com',
+        databaseURL: 'https://warper.firebaseio.com',
+        storageBucket: 'project-313180311630044673.appspot.com'
+      });
+    })
     .plugin('persistence', baseConfig => {
       baseConfig.configure({
-        baseUrl: 'https://warper.firebaseio.com',
-        requestInterceptor: request => {
-          return window.authenticationService.getToken().then(token => {
-            // TODO auth function
-            let [path, ...params] = request.url.split('?');
-            let url = `${path}.json?auth=${[token, params.join('?')].join('&')}`;
-            let init = {};
-            ['method', 'headers', 'body', 'mode', 'credentials',
-              'cache', 'redirect', 'referrer', 'integrity']
-                .forEach(prop => init[prop] = request[prop]);
-            return new Request(url, init);
-          });
-        }
+        baseUrl: 'https://warper.firebaseio.com'
       });
     });
 

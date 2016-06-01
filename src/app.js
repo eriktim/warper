@@ -1,10 +1,9 @@
 import {inject} from 'aurelia-framework';
-import {AuthenticationService} from './firebase/authentication';
+import {AuthenticationService} from 'aurelia-firebase';
 
 @inject(AuthenticationService)
 export class App {
   constructor(authenticationService) {
-window.authenticationService = authenticationService;
     Promise.resolve()
       .then(() => {
         if (!authenticationService.isLoggedIn()) {

@@ -17,6 +17,7 @@ System.config({
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.2.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.2.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.2.5",
+    "aurelia-firebase": "github:gingerik/aurelia-firebase@master",
     "aurelia-framework": "npm:aurelia-framework@1.0.0-beta.1.2.4",
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0-beta.1.2.1",
     "aurelia-loader-default": "npm:aurelia-loader-default@1.0.0-beta.1.2.2",
@@ -33,17 +34,21 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "exif-js": "npm:exif-js@2.1.1",
     "fetch": "github:github/fetch@0.10.1",
-    "firebase": "npm:firebase@3.0.2",
     "font-awesome": "npm:font-awesome@4.6.1",
     "mathjs": "npm:mathjs@2.7.0",
     "okfocus/okzoom": "github:okfocus/okzoom@master",
     "persistence": "github:gingerik/persistence@master",
     "text": "github:systemjs/plugin-text@0.0.3",
+    "github:gingerik/aurelia-firebase@master": {
+      "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.0.0-beta.1.2.3",
+      "aurelia-logging": "npm:aurelia-logging@1.0.0-beta.1.2.1",
+      "firebase": "npm:firebase@3.0.3"
+    },
     "github:gingerik/persistence@master": {
       "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
-      "assert": "npm:assert@1.4.0"
+      "assert": "npm:assert@1.4.1"
     },
     "github:jspm/nodelibs-buffer@0.1.0": {
       "buffer": "npm:buffer@3.6.0"
@@ -105,7 +110,7 @@ System.config({
     "github:twbs/bootstrap@3.3.6": {
       "jquery": "npm:jquery@2.2.3"
     },
-    "npm:asn1.js@4.6.0": {
+    "npm:asn1.js@4.6.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "bn.js": "npm:bn.js@4.11.3",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -114,10 +119,9 @@ System.config({
       "minimalistic-assert": "npm:minimalistic-assert@1.0.0",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
     },
-    "npm:assert@1.4.0": {
+    "npm:assert@1.4.1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "buffer-shims": "npm:buffer-shims@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "util": "npm:util@0.10.3"
     },
@@ -295,16 +299,13 @@ System.config({
       "create-hash": "npm:create-hash@1.1.2",
       "create-hmac": "npm:create-hmac@1.1.4",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
-      "elliptic": "npm:elliptic@6.2.5",
+      "elliptic": "npm:elliptic@6.2.8",
       "inherits": "npm:inherits@2.0.1",
       "parse-asn1": "npm:parse-asn1@5.0.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:buffer-equal-constant-time@1.0.1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
-    },
-    "npm:buffer-shims@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:buffer-xor@1.0.3": {
@@ -351,7 +352,7 @@ System.config({
       "bn.js": "npm:bn.js@4.11.3",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
-      "elliptic": "npm:elliptic@6.2.5"
+      "elliptic": "npm:elliptic@6.2.8"
     },
     "npm:create-hash@1.1.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -401,15 +402,12 @@ System.config({
       "base64-url": "npm:base64-url@1.2.2",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:elliptic@6.2.5": {
+    "npm:elliptic@6.2.8": {
       "bn.js": "npm:bn.js@4.11.3",
       "brorand": "npm:brorand@1.0.5",
       "hash.js": "npm:hash.js@1.0.3",
       "inherits": "npm:inherits@2.0.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2"
-    },
-    "npm:es6-promise@3.2.1": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:evp_bytestokey@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -433,14 +431,14 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0",
       "websocket-driver": "npm:websocket-driver@0.6.5"
     },
-    "npm:firebase@3.0.2": {
+    "npm:firebase@3.0.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "es6-promise": "npm:es6-promise@3.2.1",
       "faye-websocket": "npm:faye-websocket@0.9.3",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "https": "github:jspm/nodelibs-https@0.1.0",
       "jsonwebtoken": "npm:jsonwebtoken@5.7.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "rsvp": "npm:rsvp@3.2.1"
     },
     "npm:font-awesome@4.6.1": {
       "css": "github:systemjs/plugin-css@0.1.21"
@@ -515,7 +513,7 @@ System.config({
       "brorand": "npm:brorand@1.0.5"
     },
     "npm:parse-asn1@5.0.0": {
-      "asn1.js": "npm:asn1.js@4.6.0",
+      "asn1.js": "npm:asn1.js@4.6.2",
       "browserify-aes": "npm:browserify-aes@1.0.6",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
@@ -572,6 +570,9 @@ System.config({
     },
     "npm:ripemd160@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:rsvp@3.2.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:sha.js@2.4.5": {

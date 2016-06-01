@@ -1,8 +1,9 @@
 import {computedFrom, inject, LogManager} from 'aurelia-framework';
+import {AuthenticationService} from 'aurelia-firebase';
 import {EntityManager} from 'persistence';
 import {Frame} from '../model/frame';
 
-@inject(EntityManager)
+@inject(EntityManager, AuthenticationService)
 export class Editor {
   sequence = [];
   frame;
@@ -11,11 +12,13 @@ export class Editor {
   selectInternal;
   setReferenceInternal;
 
-  constructor(entityManager) {
+  constructor(entityManager, authenticationService) {
     this.logger = LogManager.getLogger('Editor');
     this.dirtyInternal = this.dirty.bind(this);
     this.selectInternal = this.select.bind(this);
     this.setReferenceInternal = this.setReference.bind(this);
+
+    entityManager.setInterceptor(authenticationService.interceptor);
 
 setTimeout(() => {
     entityManager.find(Frame)
