@@ -1,6 +1,7 @@
 import {computedFrom, inject, LogManager} from 'aurelia-framework';
 import {AuthenticationService} from 'aurelia-firebase';
 import {EntityManager} from 'persistence';
+
 import {Frame} from '../model/frame';
 
 @inject(EntityManager, AuthenticationService)
@@ -20,17 +21,22 @@ export class Editor {
 
     entityManager.setInterceptor(authenticationService.interceptor);
 
-setTimeout(() => {
-    entityManager.find(Frame)
-      .then(frames => {
-        console.log('fire frames', frames);
-        // TODO sort by created, also async
-        this.sequence = frames;
-        if (this.sequence.length > 1) {
-          this.select(this.sequence[1]);
-        }
-      });
-}, 3000);
+    let interval;
+    interval = setInterval(() => {
+      if (!authenticationService.isLoggedIn()) {
+        return;
+      }
+      clearInterval(interval);
+      entityManager.query(Frame)
+        .then(frames => {
+          console.log('fire frames', frames);
+          // TODO sort by created, also async
+          this.sequence = frames;
+          if (this.sequence.length > 1) {
+            this.select(this.sequence[1]);
+          }
+        });
+    }, 500);
   }
 
   @computedFrom('frame')

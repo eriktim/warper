@@ -1,6 +1,7 @@
 import {LogManager} from 'aurelia-framework';
 import {EXIF} from 'exif-js';
-import {ElementCollection, Entity, Id, OneToOne, PostLoad} from 'persistence';
+import {Collection, Entity, Id, OneToOne, PostLoad} from 'persistence';
+
 import {Point} from './point';
 
 const logger = LogManager.getLogger('Frame');
@@ -19,9 +20,9 @@ export class Frame {
   created = undefined;
   width = undefined;
   height = undefined;
-  @OneToOne() reference;
-  @ElementCollection(Point) points;
-  @ElementCollection(Point) refPoints;
+  @OneToOne(this) reference;
+  @Collection(Point) points;
+  @Collection(Point) refPoints;
   enabled = undefined;
 
   @PostLoad

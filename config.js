@@ -37,7 +37,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.1",
     "mathjs": "npm:mathjs@2.7.0",
     "okfocus/okzoom": "github:okfocus/okzoom@master",
-    "persistence": "github:trenneman/persistence-js@0.1.0",
+    "persistence": "github:trenneman/persistence-js@0.1.1",
     "text": "github:systemjs/plugin-text@0.0.3",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
@@ -104,7 +104,7 @@ System.config({
       "aurelia-logging": "npm:aurelia-logging@1.0.0",
       "firebase": "npm:firebase@3.3.0"
     },
-    "github:trenneman/persistence-js@0.1.0": {
+    "github:trenneman/persistence-js@0.1.1": {
       "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6",
       "moment": "npm:moment@2.14.1"
     },

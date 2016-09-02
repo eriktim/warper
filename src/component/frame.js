@@ -1,12 +1,18 @@
 import {bindable, computedFrom} from 'aurelia-framework';
-import {Point} from '../model/point';
 import math from 'mathjs';
+
+import {Point} from '../model/point';
 
 const ZOOM_FACTOR = 2;
 const THREE = 3;
 
 function clamp(x, a, b) {
-  return x < a ? a : x > b ? b : x;
+  if (x < a) {
+    x = a;
+  } else if (x > b) {
+    x = b;
+  }
+  return x;
 }
 
 export class WrFrame {

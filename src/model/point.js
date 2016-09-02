@@ -1,3 +1,6 @@
+import {Collectible} from 'persistence';
+
+@Collectible
 export class Point {
   x;
   y;
