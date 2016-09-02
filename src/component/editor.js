@@ -12,6 +12,8 @@ export class Editor {
   logger;
   selectInternal;
   setReferenceInternal;
+  indexCurrent;
+  indexReference;
 
   constructor(entityManager, authenticationService) {
     this.logger = LogManager.getLogger('Editor');
@@ -39,17 +41,8 @@ export class Editor {
     }, 500);
   }
 
-  @computedFrom('frame')
-  get indexCurrent() {
-    return this.sequence.indexOf(this.frame);
-  }
-
-  @computedFrom('reference')
-  get indexReference() {
-    return this.sequence.indexOf(this.reference);
-  }
-
   dirty() {
+    // TODO save to firebase
     let persistentData = JSON.stringify(this.sequence);
     localStorage.setItem('sequence', persistentData);
     this.logger.debug('saved on ' + new Date());
@@ -57,7 +50,12 @@ export class Editor {
 
   select(frame) {
     this.frame = frame;
-    this.reference = frame.reference;
+    this.indexCurrent = this.sequence.indexOf(this.frame);
+    this.reference = null;
+    frame.reference.then(ref => {
+      this.reference = ref;
+      this.sequence.indexOf(ref);
+    });
   }
 
   setReference(reference) {

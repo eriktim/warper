@@ -33,17 +33,17 @@ export class WrFrame {
 
   @computedFrom('focus', 'activeFrame')
   get viewBox() {
-    let viewBox;
+    let viewBox = '0 0 0 0';
     if (this.focus) {
       let rect = this.svg.getBoundingClientRect();
-      viewBox = `${this.focus.x - (ZOOM_FACTOR - 1) * rect.width / ZOOM_FACTOR / 2} ` +
-                `${this.focus.y - (ZOOM_FACTOR - 1) * rect.height / ZOOM_FACTOR / 2} ` +
-                `${rect.width / ZOOM_FACTOR} ` +
-                `${rect.height / ZOOM_FACTOR}`;
+      if (rect && rect.width && rect.height) {
+        viewBox = `${this.focus.x - (ZOOM_FACTOR - 1) * rect.width / ZOOM_FACTOR / 2} ` +
+                  `${this.focus.y - (ZOOM_FACTOR - 1) * rect.height / ZOOM_FACTOR / 2} ` +
+                  `${rect.width / ZOOM_FACTOR} ` +
+                  `${rect.height / ZOOM_FACTOR}`;
+      }
     } else if (this.activeFrame) {
       viewBox = `0 0 ${this.activeFrame.width} ${this.activeFrame.height}`;
-    } else {
-      viewBox = '0 0 0 0';
     }
     return viewBox;
   }
