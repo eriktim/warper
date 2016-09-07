@@ -17,7 +17,7 @@ System.config({
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.2.1",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.2.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.2.5",
-    "aurelia-firebase": "github:trenneman/aurelia-firebase@0.1.0",
+    "aurelia-firebase": "github:trenneman/aurelia-firebase-rest@0.2.4",
     "aurelia-framework": "npm:aurelia-framework@1.0.0-beta.1.2.4",
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0-beta.1.2.1",
     "aurelia-loader-default": "npm:aurelia-loader-default@1.0.0-beta.1.2.2",
@@ -37,7 +37,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.1",
     "mathjs": "npm:mathjs@2.7.0",
     "okfocus/okzoom": "github:okfocus/okzoom@master",
-    "persistence": "github:trenneman/persistence-js@0.1.2",
+    "persistence": "github:trenneman/persistence@0.1.0",
     "text": "github:systemjs/plugin-text@0.0.3",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
@@ -99,12 +99,12 @@ System.config({
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
-    "github:trenneman/aurelia-firebase@0.1.0": {
+    "github:trenneman/aurelia-firebase-rest@0.2.4": {
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.0.0",
       "aurelia-logging": "npm:aurelia-logging@1.0.0",
-      "firebase": "npm:firebase@3.3.0"
+      "firebase": "npm:firebase@3.3.1"
     },
-    "github:trenneman/persistence-js@0.1.2": {
+    "github:trenneman/persistence@0.1.0": {
       "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6",
       "moment": "npm:moment@2.14.1"
     },
@@ -445,7 +445,7 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0",
       "websocket-driver": "npm:websocket-driver@0.6.5"
     },
-    "npm:firebase@3.3.0": {
+    "npm:firebase@3.3.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "dom-storage": "npm:dom-storage@2.0.2",
       "faye-websocket": "npm:faye-websocket@0.9.3",

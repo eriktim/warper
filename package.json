@@ -66,7 +66,7 @@
       "aurelia-animator-css": "npm:aurelia-animator-css@^1.0.0-beta.1.1.0",
       "aurelia-bootstrapper": "npm:aurelia-bootstrapper@^1.0.0-beta.1.1.1",
       "aurelia-fetch-client": "npm:aurelia-fetch-client@^1.0.0-beta.1.1.0",
-      "aurelia-firebase": "github:trenneman/aurelia-firebase@^0.1.0",
+      "aurelia-firebase": "github:trenneman/aurelia-firebase-rest@0.2.4",
       "aurelia-framework": "npm:aurelia-framework@^1.0.0-beta.1.1.0",
       "aurelia-history-browser": "npm:aurelia-history-browser@^1.0.0-beta.1.1.1",
       "aurelia-loader-default": "npm:aurelia-loader-default@^1.0.0-beta.1.1.1",
@@ -82,7 +82,7 @@
       "fetch": "github:github/fetch@^0.10.1",
       "font-awesome": "npm:font-awesome@^4.5.0",
       "mathjs": "npm:mathjs@^2.7.0",
-      "persistence": "github:trenneman/persistence-js@^0.1.2",
+      "persistence": "github:trenneman/persistence@0.1.0",
       "text": "github:systemjs/plugin-text@^0.0.3"
     },
     "devDependencies": {
@@ -91,8 +91,8 @@
       "core-js": "npm:core-js@^1.1.4"
     },
     "overrides": {
-      "github:trenneman/persistence-js@0.1.1": {
-        "main": "aurelia.js"
+      "github:trenneman/persistence@0.1.0": {
+        "main": "aurelia"
       }
     }
   }

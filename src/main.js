@@ -14,7 +14,16 @@ export function configure(aurelia) {
     })
     .plugin('persistence', baseConfig => {
       baseConfig.configure({
-        baseUrl: 'https://warper.firebaseio.com'
+        baseUrl: 'https://warper.firebaseio.com',
+        queryEntityMapperFactory: Entity => {
+          return obj => {
+            let map = new Map();
+            for (let key in obj) {
+              map.set(obj, Entity);
+            }
+            return map;
+          }
+        }
       });
     });
 

@@ -1,13 +1,13 @@
 import {inject} from 'aurelia-framework';
-import {AuthenticationService} from 'aurelia-firebase';
+import {Firebase} from 'aurelia-firebase';
 
-@inject(AuthenticationService)
+@inject(Firebase)
 export class App {
-  constructor(authenticationService) {
+  constructor(firebase) {
     Promise.resolve()
       .then(() => {
-        if (!authenticationService.isLoggedIn()) {
-          return authenticationService.login('e.timmers@gmail.com', 'test');
+        if (!firebase.isSignedIn()) {
+          return firebase.signIn('e.timmers@gmail.com', 'test');
         }
       });
   }
