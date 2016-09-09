@@ -82,7 +82,8 @@
       "fetch": "github:github/fetch@^0.10.1",
       "font-awesome": "npm:font-awesome@^4.5.0",
       "mathjs": "npm:mathjs@^2.7.0",
-      "persistence": "github:trenneman/persistence@0.1.1",
+      "persistence": "github:trenneman/persistence@persistence-plugin",
+      "persistence-plugin-firebase": "github:trenneman/persistence-plugin-firebase@persistence-plugin",
       "text": "github:systemjs/plugin-text@^0.0.3"
     },
     "devDependencies": {
@@ -91,7 +92,7 @@
       "core-js": "npm:core-js@^1.1.4"
     },
     "overrides": {
-      "github:trenneman/persistence@0.1.0": {
+      "github:trenneman/persistence@persistence-plugin": {
         "main": "aurelia"
       }
     }

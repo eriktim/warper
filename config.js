@@ -31,13 +31,15 @@ System.config({
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
+    "console-polyfill": "npm:console-polyfill@0.2.2",
     "core-js": "npm:core-js@1.2.6",
     "exif-js": "npm:exif-js@2.1.1",
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.6.1",
     "mathjs": "npm:mathjs@2.7.0",
     "okfocus/okzoom": "github:okfocus/okzoom@master",
-    "persistence": "github:trenneman/persistence@0.1.1",
+    "persistence": "github:trenneman/persistence@persistence-plugin",
+    "persistence-plugin-firebase": "github:trenneman/persistence-plugin-firebase@persistence-plugin",
     "text": "github:systemjs/plugin-text@0.0.3",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
@@ -104,7 +106,10 @@ System.config({
       "aurelia-logging": "npm:aurelia-logging@1.0.0",
       "firebase": "npm:firebase@3.3.0"
     },
-    "github:trenneman/persistence@0.1.1": {
+    "github:trenneman/persistence-plugin-firebase@persistence-plugin": {
+      "firebase": "npm:firebase@3.3.0"
+    },
+    "github:trenneman/persistence@persistence-plugin": {
       "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6",
       "moment": "npm:moment@2.14.1"
     },
@@ -418,7 +423,7 @@ System.config({
     },
     "npm:elliptic@6.3.1": {
       "bn.js": "npm:bn.js@4.11.6",
-      "brorand": "npm:brorand@1.0.5",
+      "brorand": "npm:brorand@1.0.6",
       "hash.js": "npm:hash.js@1.0.3",
       "inherits": "npm:inherits@2.0.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2"
@@ -526,7 +531,7 @@ System.config({
     },
     "npm:miller-rabin@4.0.0": {
       "bn.js": "npm:bn.js@4.11.6",
-      "brorand": "npm:brorand@1.0.5"
+      "brorand": "npm:brorand@1.0.6"
     },
     "npm:parse-asn1@5.0.0": {
       "asn1.js": "npm:asn1.js@4.8.0",

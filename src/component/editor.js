@@ -1,10 +1,9 @@
 import {inject, LogManager} from 'aurelia-framework';
-import {Firebase} from 'aurelia-firebase';
 import {EntityManager} from 'persistence';
 
 import {Frame} from '../model/frame';
 
-@inject(EntityManager, Firebase)
+@inject(EntityManager)
 export class Editor {
   entityManager;
   sequence = [];
@@ -16,14 +15,18 @@ export class Editor {
   indexCurrent;
   indexReference;
 
-  constructor(entityManager, firebase) {
+  constructor(entityManager) {
     this.entityManager = entityManager;
     this.logger = LogManager.getLogger('Editor');
     this.dirtyInternal = this.dirty.bind(this);
     this.selectInternal = this.select.bind(this);
     this.setReferenceInternal = this.setReference.bind(this);
 
-    this.entityManager.setInterceptor(firebase.interceptor);
+    const firebase = this.entityManager.get('firebase');
+
+    if (!firebase.isSignedIn()) {
+      firebase.signIn('e.timmers@gmail.com', 'test');
+    }
 
     let interval;
     interval = setInterval(() => {

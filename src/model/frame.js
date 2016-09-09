@@ -17,7 +17,7 @@ function storeExifData(frame, data) {
 @Entity
 export class Frame {
   @Id
-  @Property('_id')
+  @Property('__id__')
   id;
 
   src = undefined;
