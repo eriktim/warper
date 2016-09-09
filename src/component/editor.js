@@ -1,4 +1,4 @@
-import {computedFrom, inject, LogManager} from 'aurelia-framework';
+import {inject, LogManager} from 'aurelia-framework';
 import {Firebase} from 'aurelia-firebase';
 import {EntityManager} from 'persistence';
 
@@ -6,6 +6,7 @@ import {Frame} from '../model/frame';
 
 @inject(EntityManager, Firebase)
 export class Editor {
+  entityManager;
   sequence = [];
   frame;
   reference;
@@ -16,12 +17,13 @@ export class Editor {
   indexReference;
 
   constructor(entityManager, firebase) {
+    this.entityManager = entityManager;
     this.logger = LogManager.getLogger('Editor');
     this.dirtyInternal = this.dirty.bind(this);
     this.selectInternal = this.select.bind(this);
     this.setReferenceInternal = this.setReference.bind(this);
 
-    entityManager.setInterceptor(firebase.interceptor);
+    this.entityManager.setInterceptor(firebase.interceptor);
 
     let interval;
     interval = setInterval(() => {
@@ -29,23 +31,31 @@ export class Editor {
         return;
       }
       clearInterval(interval);
-      entityManager.query(Frame)
+      this.entityManager.query(Frame)
         .then(frames => {
-          console.log('fire frames', frames);
-          // TODO sort by created, also async
-          this.sequence = frames;
-          if (this.sequence.length > 1) {
-            this.select(this.sequence[1]);
-          }
+          return Promise.all(
+            frames.slice(1).map(frame => frame.reference
+              .then(ref => {
+                if (!ref) {
+                  frame.reference = frames[0];
+                }
+              })
+            )
+          )
+          .then(() => {
+            this.sequence = frames.sort((a, b) => a.created.diff(b.created));
+            if (this.sequence.length > 1) {
+              this.select(this.sequence[1]);
+            }
+          });
         });
     }, 500);
   }
 
   dirty() {
-    // TODO save to firebase
-    let persistentData = JSON.stringify(this.sequence);
-    localStorage.setItem('sequence', persistentData);
-    this.logger.debug('saved on ' + new Date());
+    return Promise.all(
+      this.sequence.map(frame => this.entityManager.persist(frame))
+    ).then(() => this.logger.debug('saved on ' + new Date()));
   }
 
   select(frame) {
@@ -54,7 +64,7 @@ export class Editor {
     this.reference = null;
     frame.reference.then(ref => {
       this.reference = ref;
-      this.sequence.indexOf(ref);
+      this.indexReference = this.sequence.indexOf(ref);
     });
   }
 

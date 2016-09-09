@@ -1,0 +1,24 @@
+.wr-thumb {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 0.5em;
+}
+
+.wr-thumb img {
+  opacity: 0.7;
+}
+
+.wr-thumb.is-current img {
+  opacity: 1;
+  box-shadow: 0px 0px 17px rgb(51, 122, 183);
+}
+
+.wr-thumb.is-reference img {
+  opacity: 1;
+  box-shadow: 0px 0px 17px rgb(127, 127, 127);
+}
+
+.wr-thumb > div:first-of-type {
+  margin-right: 0.5em;
+}

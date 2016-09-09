@@ -1,6 +1,7 @@
 import {LogManager} from 'aurelia-framework';
 import {EXIF} from 'exif-js';
-import {Collection, Entity, Id, OneToOne, PostLoad} from 'persistence';
+import {Collection, Entity, Id, OneToOne, PostLoad, Property, Temporal}
+    from 'persistence';
 
 import {Point} from './point';
 
@@ -15,33 +16,39 @@ function storeExifData(frame, data) {
 
 @Entity
 export class Frame {
-  @Id id;
+  @Id
+  @Property('_id')
+  id;
+
   src = undefined;
-  created = undefined;
+  @Temporal created;
   width = undefined;
   height = undefined;
-  @OneToOne(this) reference;
+  @OneToOne('self') reference;
   @Collection(Point) points;
   @Collection(Point) refPoints;
   enabled = undefined;
 
   @PostLoad
   extractExifData() {
-    if (!this.src) {
-      return;
+    let promise;
+    if (this.src && (!this.width || !this.height || !this.created)) {
+      promise = new Promise(resolve => {
+        logger.info('extracting exif data');
+        let frame = this;
+        let image = new Image();
+        image.onload = function() {
+          EXIF.getData(image, function() {
+            storeExifData(frame, this);
+            logger.info(`found exif data: ` +
+                `${frame.width}x${frame.height}, ${frame.created}`);
+            image = null;
+            resolve();
+          });
+        };
+        image.src = this.src;
+      });
     }
-    if (!this.width || !this.height || !this.created) {
-      logger.info('extracting exif data');
-      let frame = this;
-      let image = new Image();
-      image.onload = function() {
-        EXIF.getData(image, function() {
-          storeExifData(frame, this);
-          logger.info(`found exif data: ${frame.width}x${frame.height}, ${frame.created}`);
-          image = null;
-        });
-      };
-      image.src = this.src;
-    }
+    return promise;
   }
 }

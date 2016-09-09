@@ -19,7 +19,7 @@ export function configure(aurelia) {
           return obj => {
             let map = new Map();
             for (let key in obj) {
-              map.set(obj, Entity);
+              map.set(obj[key], Entity);
             }
             return map;
           }

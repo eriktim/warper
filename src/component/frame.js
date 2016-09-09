@@ -109,9 +109,11 @@ export class WrFrame {
   }
 
   frameChanged() {
-    this.reference = this.frame ? this.frame.reference : undefined;
+    this.reference = null;
+    if (this.frame) {
+      this.frame.reference.then(ref => this.reference = ref);
+    }
     this.activeFrame = null;
-    this.zoomed = false;
     this.fixedReference = this.bindingContext.sequence.indexOf(this.frame) <= 1;
     this.showTab('frame');
   }
@@ -150,12 +152,11 @@ export class WrFrame {
     let v = Array.from(this.frame.refPoints);
     let w;
     let min = Infinity;
-    let indices = [];
     for (let a of v) {
       for (let b of v.filter(e => e !== a)) {
         let c = v.find(e => e !== a && e !== b);
         let vc = [a, b, c];
-        let d = this.distance(u, vc)
+        let d = this.distance(u, vc);
         if (d < min) {
           min = d;
           w = vc;
@@ -176,8 +177,11 @@ export class WrFrame {
   copyReference() {
     let index = this.bindingContext.sequence.indexOf(this.frame);
     if (index > 1) {
-      let ref = sequence[index - 1];
-      this.frame.refPoints = new Set(ref.refPoints);
+      let ref = this.bindingContext.sequence[index - 1];
+      this.frame.refPoints.clear();
+      for (let point of ref.refPoints.values()) {
+        this.frame.refPoints.add(point);
+      }
       this.frame.reference = ref;
     }
   }
