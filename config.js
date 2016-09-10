@@ -107,6 +107,7 @@ System.config({
       "firebase": "npm:firebase@3.3.0"
     },
     "github:trenneman/persistence-plugin-firebase@persistence-plugin": {
+      "console-polyfill": "npm:console-polyfill@0.2.2",
       "firebase": "npm:firebase@3.3.0"
     },
     "github:trenneman/persistence@persistence-plugin": {

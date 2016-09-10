@@ -2,6 +2,7 @@ import {inject, LogManager} from 'aurelia-framework';
 import {EntityManager} from 'persistence';
 
 import {Frame} from '../model/frame';
+import {firebase} from '../main';
 
 @inject(EntityManager)
 export class Editor {
@@ -21,8 +22,6 @@ export class Editor {
     this.dirtyInternal = this.dirty.bind(this);
     this.selectInternal = this.select.bind(this);
     this.setReferenceInternal = this.setReference.bind(this);
-
-    const firebase = this.entityManager.get('firebase');
 
     if (!firebase.isSignedIn()) {
       firebase.signIn('e.timmers@gmail.com', 'test');
