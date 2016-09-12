@@ -2,11 +2,6 @@ import {Collectible} from 'persistence';
 
 @Collectible
 export class Point {
-  x;
-  y;
-
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
+  x = undefined;
+  y = undefined;
 }

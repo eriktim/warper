@@ -57,7 +57,7 @@ export class WrFrame {
   }
 
   click(event) {
-    if (!(this.activePoints.size < 3)) {
+    if (this.activePoints.size >= 3) {
       return;
     }
     let offsetX = event.offsetX;
@@ -76,7 +76,9 @@ export class WrFrame {
     } else {
       let sx = this.focus.x + (offsetX - rect.width / 2) / ZOOM_FACTOR;
       let sy = this.focus.y + (offsetY - rect.height / 2) / ZOOM_FACTOR;
-      this.activePoints.add(new Point(sx, sy));
+      let point = this.activePoints.newItem();
+      point.x = sx;
+      point.y = sy;
       this.updatePointsOrder();
       this.focus = null;
       this.triggerDirty();
@@ -92,12 +94,12 @@ export class WrFrame {
     switch (type) {
     case 'frame':
       this.activeFrame = this.frame;
-      this.activePoints = this.frame ? this.frame.points : new Set();
+      this.activePoints = this.frame.points;
       this.preview = false;
       break;
     case 'reference':
       this.activeFrame = this.reference;
-      this.activePoints = this.frame ? this.frame.refPoints : new Set();
+      this.activePoints = this.frame.refPoints;
       this.preview = false;
       break;
     case 'preview':
@@ -164,7 +166,12 @@ export class WrFrame {
         }
       }
     }
-    this.frame.refPoints = new Set(w);
+    this.frame.refPoints.clear();
+    for (let wi of w) {
+      let p = this.frame.refPoints.newItem();
+      p.x = wi.x;
+      p.y = wi.y;
+    }
   }
 
   distance(u, v) {
