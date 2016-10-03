@@ -1,8 +1,6 @@
 import {bindable, computedFrom} from 'aurelia-framework';
 import math from 'mathjs';
 
-import {Point} from '../model/point';
-
 const ZOOM_FACTOR = 2;
 const THREE = 3;
 
@@ -57,7 +55,7 @@ export class WrFrame {
   }
 
   click(event) {
-    if (this.activePoints.size >= 3) {
+    if (this.activePoints.size >= THREE) {
       return;
     }
     let offsetX = event.offsetX;
@@ -168,9 +166,7 @@ export class WrFrame {
     }
     this.frame.refPoints.clear();
     for (let wi of w) {
-      let p = this.frame.refPoints.newItem();
-      p.x = wi.x;
-      p.y = wi.y;
+      this.frame.refPoints.add(wi);
     }
   }
 
@@ -179,7 +175,7 @@ export class WrFrame {
   }
 
   triggerDirty() {
-    this.dirty();
+    return this.dirty();
   }
 
   copyReference() {
@@ -188,7 +184,9 @@ export class WrFrame {
       let ref = this.bindingContext.sequence[index - 1];
       this.frame.refPoints.clear();
       for (let point of ref.refPoints.values()) {
-        this.frame.refPoints.add(point);
+        let p = this.frame.refPoints.newItem();
+        p.x = point.x;
+        p.y = point.y;
       }
       this.frame.reference = ref;
     }

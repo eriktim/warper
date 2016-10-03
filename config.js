@@ -107,21 +107,19 @@ System.config({
       "firebase": "npm:firebase@3.3.0"
     },
     "github:trenneman/persistence-plugin-firebase@persistence-plugin": {
-      "console-polyfill": "npm:console-polyfill@0.2.2",
+      "console-polyfill": "npm:console-polyfill@0.2.3",
       "firebase": "npm:firebase@3.3.0"
     },
     "github:trenneman/persistence@persistence-plugin": {
-      "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6",
+      "aurelia-binding": "npm:aurelia-binding@1.0.6",
       "moment": "npm:moment@2.14.1"
     },
     "github:twbs/bootstrap@3.3.6": {
       "jquery": "npm:jquery@2.2.3"
     },
-    "npm:asn1.js@4.8.0": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0",
+    "npm:asn1.js@4.8.1": {
       "bn.js": "npm:bn.js@4.11.6",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
       "minimalistic-assert": "npm:minimalistic-assert@1.0.0",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
@@ -142,6 +140,12 @@ System.config({
       "aurelia-metadata": "npm:aurelia-metadata@1.0.0",
       "aurelia-pal": "npm:aurelia-pal@1.0.0",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.0.0"
+    },
+    "npm:aurelia-binding@1.0.6": {
+      "aurelia-logging": "npm:aurelia-logging@1.0.0",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.0",
+      "aurelia-pal": "npm:aurelia-pal@1.0.0",
+      "aurelia-task-queue": "npm:aurelia-task-queue@1.1.0"
     },
     "npm:aurelia-bootstrapper@1.0.0-beta.1.2.1": {
       "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.0-beta.1.2.1",
@@ -228,6 +232,9 @@ System.config({
     "npm:aurelia-task-queue@1.0.0-beta.1.2.1": {
       "aurelia-pal": "npm:aurelia-pal@1.0.0"
     },
+    "npm:aurelia-task-queue@1.1.0": {
+      "aurelia-pal": "npm:aurelia-pal@1.0.0"
+    },
     "npm:aurelia-templating-binding@1.0.0-beta.1.2.4": {
       "aurelia-binding": "npm:aurelia-binding@1.0.0-beta.1.3.6",
       "aurelia-logging": "npm:aurelia-logging@1.0.0",
@@ -280,7 +287,7 @@ System.config({
     "npm:browserify-aes@1.0.6": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "buffer-xor": "npm:buffer-xor@1.0.3",
-      "cipher-base": "npm:cipher-base@1.0.2",
+      "cipher-base": "npm:cipher-base@1.0.3",
       "create-hash": "npm:create-hash@1.1.2",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "evp_bytestokey": "npm:evp_bytestokey@1.0.0",
@@ -297,7 +304,7 @@ System.config({
     },
     "npm:browserify-des@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "cipher-base": "npm:cipher-base@1.0.2",
+      "cipher-base": "npm:cipher-base@1.0.3",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "des.js": "npm:des.js@1.0.0",
       "inherits": "npm:inherits@2.0.1"
@@ -316,7 +323,7 @@ System.config({
       "create-hash": "npm:create-hash@1.1.2",
       "create-hmac": "npm:create-hmac@1.1.4",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
-      "elliptic": "npm:elliptic@6.3.1",
+      "elliptic": "npm:elliptic@6.3.2",
       "inherits": "npm:inherits@2.0.1",
       "parse-asn1": "npm:parse-asn1@5.0.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
@@ -341,7 +348,7 @@ System.config({
       "camelcase": "npm:camelcase@1.2.1",
       "map-obj": "npm:map-obj@1.0.1"
     },
-    "npm:cipher-base@1.0.2": {
+    "npm:cipher-base@1.0.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "inherits": "npm:inherits@2.0.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0",
@@ -369,11 +376,11 @@ System.config({
       "bn.js": "npm:bn.js@4.11.6",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
-      "elliptic": "npm:elliptic@6.3.1"
+      "elliptic": "npm:elliptic@6.3.2"
     },
     "npm:create-hash@1.1.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "cipher-base": "npm:cipher-base@1.0.2",
+      "cipher-base": "npm:cipher-base@1.0.3",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inherits": "npm:inherits@2.0.1",
@@ -395,7 +402,7 @@ System.config({
       "create-hmac": "npm:create-hmac@1.1.4",
       "diffie-hellman": "npm:diffie-hellman@5.0.2",
       "inherits": "npm:inherits@2.0.1",
-      "pbkdf2": "npm:pbkdf2@3.0.5",
+      "pbkdf2": "npm:pbkdf2@3.0.8",
       "public-encrypt": "npm:public-encrypt@4.0.0",
       "randombytes": "npm:randombytes@2.0.3"
     },
@@ -422,7 +429,7 @@ System.config({
       "base64-url": "npm:base64-url@1.3.2",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:elliptic@6.3.1": {
+    "npm:elliptic@6.3.2": {
       "bn.js": "npm:bn.js@4.11.6",
       "brorand": "npm:brorand@1.0.6",
       "hash.js": "npm:hash.js@1.0.3",
@@ -535,18 +542,18 @@ System.config({
       "brorand": "npm:brorand@1.0.6"
     },
     "npm:parse-asn1@5.0.0": {
-      "asn1.js": "npm:asn1.js@4.8.0",
+      "asn1.js": "npm:asn1.js@4.8.1",
       "browserify-aes": "npm:browserify-aes@1.0.6",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hash": "npm:create-hash@1.1.2",
       "evp_bytestokey": "npm:evp_bytestokey@1.0.0",
-      "pbkdf2": "npm:pbkdf2@3.0.5",
+      "pbkdf2": "npm:pbkdf2@3.0.8",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:pbkdf2@3.0.5": {
+    "npm:pbkdf2@3.0.8": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "create-hmac": "npm:create-hmac@1.1.4",
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
