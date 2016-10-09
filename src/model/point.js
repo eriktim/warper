@@ -1,9 +1,7 @@
-export class Point {
-  x;
-  y;
+import {Collectible} from 'persistence';
 
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
+@Collectible
+export class Point {
+  x = undefined;
+  y = undefined;
 }

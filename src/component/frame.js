@@ -1,12 +1,16 @@
 import {bindable, computedFrom} from 'aurelia-framework';
-import {Point} from '../model/point';
 import math from 'mathjs';
 
 const ZOOM_FACTOR = 2;
 const THREE = 3;
 
 function clamp(x, a, b) {
-  return x < a ? a : x > b ? b : x
+  if (x < a) {
+    x = a;
+  } else if (x > b) {
+    x = b;
+  }
+  return x;
 }
 
 export class WrFrame {
@@ -27,17 +31,17 @@ export class WrFrame {
 
   @computedFrom('focus', 'activeFrame')
   get viewBox() {
-    let viewBox;
+    let viewBox = '0 0 0 0';
     if (this.focus) {
       let rect = this.svg.getBoundingClientRect();
-      viewBox = `${this.focus.x - (ZOOM_FACTOR - 1) * rect.width / ZOOM_FACTOR / 2} ` +
-                `${this.focus.y - (ZOOM_FACTOR - 1) * rect.height / ZOOM_FACTOR / 2} ` +
-                `${rect.width / ZOOM_FACTOR} ` +
-                `${rect.height / ZOOM_FACTOR}`;
+      if (rect && rect.width && rect.height) {
+        viewBox = `${this.focus.x - (ZOOM_FACTOR - 1) * rect.width / ZOOM_FACTOR / 2} ` +
+                  `${this.focus.y - (ZOOM_FACTOR - 1) * rect.height / ZOOM_FACTOR / 2} ` +
+                  `${rect.width / ZOOM_FACTOR} ` +
+                  `${rect.height / ZOOM_FACTOR}`;
+      }
     } else if (this.activeFrame) {
       viewBox = `0 0 ${this.activeFrame.width} ${this.activeFrame.height}`;
-    } else {
-      viewBox = '0 0 0 0';
     }
     return viewBox;
   }
@@ -51,7 +55,7 @@ export class WrFrame {
   }
 
   click(event) {
-    if (!(this.activePoints.size < 3)) {
+    if (this.activePoints.size >= THREE) {
       return;
     }
     let offsetX = event.offsetX;
@@ -70,42 +74,47 @@ export class WrFrame {
     } else {
       let sx = this.focus.x + (offsetX - rect.width / 2) / ZOOM_FACTOR;
       let sy = this.focus.y + (offsetY - rect.height / 2) / ZOOM_FACTOR;
-      this.activePoints.add(new Point(sx, sy));
+      let point = this.activePoints.newItem();
+      point.x = sx;
+      point.y = sy;
       this.updatePointsOrder();
       this.focus = null;
-      this.dirty();
+      this.triggerDirty();
     }
   }
 
   remove(point) {
     this.activePoints.delete(point);
+    this.triggerDirty();
   }
 
   showTab(type) {
     switch (type) {
-      case 'frame':
-        this.activeFrame = this.frame;
-        this.activePoints = this.frame.points;
-        this.preview = false;
-        break;
-      case 'reference':
-        this.activeFrame = this.reference;
-        this.activePoints = this.frame.refPoints;
-        this.preview = false;
-        break;
-      case 'preview':
-        this.activeFrame = this.frame;
-        this.activePoints = null;
-        this.preview = true;
-        break;
+    case 'frame':
+      this.activeFrame = this.frame;
+      this.activePoints = this.frame.points;
+      this.preview = false;
+      break;
+    case 'reference':
+      this.activeFrame = this.reference;
+      this.activePoints = this.frame.refPoints;
+      this.preview = false;
+      break;
+    case 'preview':
+      this.activeFrame = this.frame;
+      this.activePoints = null;
+      this.preview = true;
+      break;
     }
     this.updatePreview();
   }
 
   frameChanged() {
-    this.reference = this.frame.reference;
+    this.reference = null;
+    if (this.frame) {
+      this.frame.reference.then(ref => this.reference = ref);
+    }
     this.activeFrame = null;
-    this.zoomed = false;
     this.fixedReference = this.bindingContext.sequence.indexOf(this.frame) <= 1;
     this.showTab('frame');
   }
@@ -144,34 +153,41 @@ export class WrFrame {
     let v = Array.from(this.frame.refPoints);
     let w;
     let min = Infinity;
-    let indices = [];
     for (let a of v) {
       for (let b of v.filter(e => e !== a)) {
         let c = v.find(e => e !== a && e !== b);
         let vc = [a, b, c];
-        let d = this.distance(u, vc)
+        let d = this.distance(u, vc);
         if (d < min) {
           min = d;
           w = vc;
         }
       }
     }
-    this.frame.refPoints = new Set(w);
+    this.frame.refPoints.clear();
+    for (let wi of w) {
+      this.frame.refPoints.add(wi);
+    }
   }
 
   distance(u, v) {
     return u.reduce((d, ui, i) => d + math.distance([ui.x, ui.y], [v[i].x, v[i].y]), 0);
   }
 
-  dirty() {
-    this.dirty();
+  triggerDirty() {
+    return this.dirty();
   }
 
   copyReference() {
     let index = this.bindingContext.sequence.indexOf(this.frame);
     if (index > 1) {
-      let ref = sequence[index - 1];
-      this.frame.refPoints = new Set(ref.refPoints);
+      let ref = this.bindingContext.sequence[index - 1];
+      this.frame.refPoints.clear();
+      for (let point of ref.refPoints.values()) {
+        let p = this.frame.refPoints.newItem();
+        p.x = point.x;
+        p.y = point.y;
+      }
       this.frame.reference = ref;
     }
   }

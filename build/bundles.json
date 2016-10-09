@@ -2,7 +2,7 @@
   "bundles": {
     "dist/app-build": {
       "includes": [
-        "[*.js]",
+        "[**/*.js]",
         "*.html!text",
         "*.css!text"
       ],
@@ -10,10 +10,10 @@
         "inject": true,
         "minify": true,
         "depCache": true,
-        "rev": true
+        "rev": false
       }
     },
-    "dist/aurelia": {
+    "dist/vendor": {
       "includes": [
         "aurelia-framework",
         "aurelia-bootstrapper",
@@ -26,14 +26,17 @@
         "aurelia-loader-default",
         "aurelia-history-browser",
         "aurelia-logging-console",
+        "awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css!text",
         "bootstrap",
         "bootstrap/css/bootstrap.css!text",
-        "awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css!text"
+        "exif-js",
+        "persistence",
+        "persistence-plugin-firebase"
       ],
       "options": {
         "inject": true,
         "minify": false,
-        "rev": true
+        "rev": false
       }
     }
   }

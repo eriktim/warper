@@ -1,8 +1,8 @@
-node_modules
-jspm_packages
-bower_components
-.idea
+/.idea
+/build/reports
+/coverage
 /dist
-build/reports
-coverage
-test/e2e/dist
+/export
+/jspm_packages
+/node_modules
+/test/e2e/dist
